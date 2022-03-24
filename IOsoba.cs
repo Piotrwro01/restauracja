@@ -6,9 +6,8 @@ using System.Threading.Tasks;
 
 namespace restauracja
 {
-     interface IKlient
+     interface IOsoba
     {
-        public int id { get; }
         public string imie { get; }
         public string nazwisko { get; }
         public decimal balans { get; }

@@ -77,25 +77,45 @@ namespace restauracja
 
         public string wyborKliena(string decyzja)// sprawdzanie + -, sprawdzanie potrawy, sprawdzanie czy wystąpiła, wypisywanie ile razy, sprowadzanie wszystkiego do wielkich liter, podsumowywanie
         {
-            if (decyzja == "koniec") return "koniec";
+            if (decyzja == "koniec") return "Dziękujemy za zamówienie";
             string[] tablicaDecyzji = decyzja.Split();
+            if (tablicaDecyzji.Length == 2)
+            {
+                decyzja += " PUSTKA";
+            }
+            Console.WriteLine(decyzja);
+            tablicaDecyzji = decyzja.Split();
             if (tablicaDecyzji.Length == 1) return naZolto("Zapomniałeś określić, czy chcesz dodać potrawę czy usunąć z listy, lub nie dałeś spacji po + lub -");
             var wybranaPotrawa = aktualneMenu.FirstOrDefault(o => o.nazwa.ToUpper() == tablicaDecyzji[1].ToUpper());
             if(wybranaPotrawa != null)
             {
-                if (tablicaDecyzji[0] == "+") // dodaj potrawe do aktualne zamówienie
+                int liczba;
+                if(tablicaDecyzji[2] == "PUSTKA") liczba = 1; //sprawdza czy było puste miejsce
+                else if (int.TryParse(tablicaDecyzji[2], out liczba)) liczba = int.Parse(tablicaDecyzji[2]);
+                else liczba = 1;
+                for (int i = 0; i< liczba; i++)
                 {
-                    dodajPotraweZZamowienia(wybranaPotrawa);
-                    return naZielono($"Dodano potrawę {wybranaPotrawa.nazwa}");
+                    if (tablicaDecyzji[0] == "+") // dodaj potrawe do aktualne zamówienie
+                    {
+                        dodajPotraweZZamowienia(wybranaPotrawa);
+                        //return naZielono($"Dodano potrawę {wybranaPotrawa.nazwa}");
+                    }
+                    else if (tablicaDecyzji[0] == "-") // usuń potrawe z aktualne zamówienie
+                    {
+                        usunPotraweZZamowienia(wybranaPotrawa);
+                        //return naCzerwono($"Usunięto potrawę {wybranaPotrawa.nazwa}");
+                    }
+                    else
+                    {
+                        return naZolto("Błędnie okreśłiłeś operację");
+                        //continue;
+                    }
                 }
-                else if (tablicaDecyzji[0] == "-") // usuń potrawe z aktualne zamówienie
-                {
-                    usunPotraweZZamowienia(wybranaPotrawa);
-                    return naCzerwono($"Usunięto potrawę {wybranaPotrawa.nazwa}");
-                }
-                else return naZolto("Błędnie okreśłiłeś operację");
+                if (tablicaDecyzji[0] == "+") return naZielono($"Dodano potrawę {wybranaPotrawa.nazwa}");
+                else if (tablicaDecyzji[0] == "-") return naCzerwono($"Usunięto potrawę {wybranaPotrawa.nazwa}");
             }
             else return naZolto($"Błędnie wybrałeś potrawę, nie posiadamy potrawy: {tablicaDecyzji[1]}"); // wypisuje potrawe klienta
+            return "Coś poszło nie tak";
         }
 
         public void wybierzPotrawe(Menu obecneMenu)
