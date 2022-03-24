@@ -128,6 +128,7 @@ namespace restauracja
                 Console.WriteLine(wyborKliena(decyz));
             } while (!czyKoniec);
             //obciążamy balans klienta o lacznaCena(decimal)
+            //komunikacja w konsoli klienta
         }
     }
 }
