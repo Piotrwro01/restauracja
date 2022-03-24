@@ -9,16 +9,18 @@ namespace restauracja
 {
     class Program
     {
-        static void Main(string[] args) {
+        static void Main(string[] args)
+        {
             Console.Title = "Restauracja";
-            KonsolaKlienta konsolaKlienta = new KonsolaKlienta();
-            konsolaKlienta.przywitanie();
-            Menu dlaKlienta = new Menu();
-            List<Potrawa> aktualneZamowienie = dlaKlienta.podajMenu();
-            dlaKlienta.wypiszMenu();
-            Zamowienie zamownienie = new Zamowienie(dlaKlienta);
-            //zamownienie.wypiszAktualneZamowienie(aktualneZamowienie);
-            zamownienie.wybierzPotrawe(dlaKlienta);
+            //Menu dlaKlienta = new Menu();
+            //Console.WriteLine("Dodaj potrawę: ");
+            //dlaKlienta.NoweDanie(Console.ReadLine());
+            //dlaKlienta.wypiszMenu();
+            Klient wyswietklienta = new Klient();
+            Console.WriteLine("Dodaj klienta: ");
+            wyswietklienta.NowyKlient(Console.ReadLine());
+            wyswietklienta.wypiszKlientow();
+
 
         }
     }
