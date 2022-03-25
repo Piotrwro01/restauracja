@@ -120,7 +120,7 @@ namespace restauracja
             return "Coś poszło nie tak";
         }
 
-        public void wybierzPotrawe(Menu obecneMenu)
+        public decimal wybierzPotrawe(Menu obecneMenu)
         {
             bool czyKoniec = false;
             do
@@ -151,6 +151,7 @@ namespace restauracja
             } while (!czyKoniec);
             //obciążamy balans klienta o lacznaCena(decimal)
             //komunikacja w konsoli klienta
+            return lacznaCena;
         }
     }
 }
