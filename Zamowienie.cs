@@ -53,19 +53,22 @@ namespace restauracja
         {
             Console.WriteLine(naNiebiesko("\nTwoje aktualne zamownie: "));
             Console.ForegroundColor = ConsoleColor.White;
+            List<Potrawa> czysta = new List<Potrawa>();
             int y = 0;
             foreach (Potrawa potrawa in aktualneZamowienie)
             {
-                if (y != 0 && aktualneZamowienie[y].nazwa == aktualneZamowienie[y-1].nazwa) //czy element nie jest pierwszy i czy są takie same
+                if(y != 0 && czysta.Contains(potrawa)) //czy element nie jest pierwszy i czy są takie same
                 {
                     y++;
+                    czysta.Add(potrawa);
                     continue; // jeżeli elementy są takie same, skipnij foreach
                 }
-                else //jeżeli pierwszy po prostu wypisz
+                else
                 {
                     int podlicz = aktualneZamowienie.Count(p => p.nazwa == potrawa.nazwa); // liczba obiektów o tej nazwie w liście zamówienie
                     Console.WriteLine($"{potrawa.nazwa,-14} {potrawa.cena} zł x {podlicz}");
                 }
+                czysta.Add(potrawa);
                 y++;
             }
             lacznaCena = 0; //czyści wartość po poprzednim wypisaniu
@@ -83,7 +86,6 @@ namespace restauracja
             {
                 decyzja += " PUSTKA";
             }
-            Console.WriteLine(decyzja);
             tablicaDecyzji = decyzja.Split();
             if (tablicaDecyzji.Length == 1) return naZolto("Zapomniałeś określić, czy chcesz dodać potrawę czy usunąć z listy, lub nie dałeś spacji po + lub -");
             var wybranaPotrawa = aktualneMenu.FirstOrDefault(o => o.nazwa.ToUpper() == tablicaDecyzji[1].ToUpper());

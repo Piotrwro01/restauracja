@@ -13,6 +13,8 @@ namespace restauracja
         {
             Console.Title = "Restauracja";
             Menu dlaKlienta = new Menu();
+            KonsolaKlienta konsolka = new KonsolaKlienta();
+            konsolka.przywitanie();
             //Console.WriteLine("Dodaj potrawę: ");
             //dlaKlienta.NoweDanie(Console.ReadLine());
             //dlaKlienta.wypiszMenu();
