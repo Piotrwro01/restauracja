@@ -9,7 +9,7 @@ namespace restauracja
 {
     class Program
     {
-        static List<Klient> listaklientow = new List<Klient> {
+        static List<Klient> listaklientow = new List<Klient> { //jakaś uproszczona baza klientów, bez używania baz danych
                    new Klient(1, "Adam", "Kowalski", 1, 0),
                    new Klient(2, "Michał", "Trynkiewicz", 1, 0),
                    new Klient(3, "Daniel", "Nowak", 1, 0) };
