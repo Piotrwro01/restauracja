@@ -12,26 +12,20 @@ namespace restauracja
         static void Main(string[] args)
         {
             Console.Title = "Restauracja";
-            Menu dlaKlienta = new Menu();
-            KonsolaKlienta konsolka = new KonsolaKlienta();
-            konsolka.przywitanie();
+            //Menu dlaKlienta = new Menu();
             //Console.WriteLine("Dodaj potrawę: ");
             //dlaKlienta.NoweDanie(Console.ReadLine());
             //dlaKlienta.wypiszMenu();
-            Klient wyswietklienta = new Klient(4,"Adam", "Kowalski", 1, 0);
-            //wyswietklienta.NowyKlient(Console.ReadLine());
-            List<Klient> listaklientow = new List<Klient> {
-                   new Klient(1, "Adam", "Kowalski", 1, 0),
-                   new Klient(2, "Michał", "Trynkiewicz", 1, 0),
-                   new Klient(3, "Daniel", "Nowak", 1, 0) };
-            wyswietklienta.stworzListe(listaklientow);
-            wyswietklienta.wypiszKlientow();
 
-            //Menu dlaKlienta = new Menu();
-            Zamowienie zamownienie = new Zamowienie(dlaKlienta);
-            zamownienie.wybierzPotrawe(dlaKlienta);
+            //Klient wyswietlklientow = new Klient();
+            //Console.WriteLine("Dodaj klienta: ");
+            //wyswietlklientow.NowyKlient(Console.ReadLine());
+            //wyswietlklientow.wypiszKlientow();
 
-
+            ListaStolikow zarzadzaniestolikami = new ListaStolikow();
+            Console.WriteLine("Dodaj stolik:");
+            zarzadzaniestolikami.NowyStolik(Console.ReadLine());
+            zarzadzaniestolikami.wypiszStoliki();
         }
     }
 }
