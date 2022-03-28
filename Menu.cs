@@ -8,7 +8,7 @@ using System.Text.RegularExpressions;
 
 namespace restauracja
 {
-    class  Menu
+    class Menu
     {
         public List<Potrawa> glowneMenu { get; set; }
         public Menu()
@@ -16,7 +16,7 @@ namespace restauracja
             glowneMenu = zwrocPodstawoweMenu();
         }
 
-        public List<Potrawa> zwrocPodstawoweMenu() //bazowe menu
+        public List<Potrawa> zwrocPodstawoweMenu()
         {
             return new List<Potrawa> {
                     new Potrawa ("Gulasz",1, 10),
@@ -29,7 +29,6 @@ namespace restauracja
         public void wybierzPotrawe()
         {
         }
-
         public List<Potrawa> podajMenu() //NOWE
         {
             return glowneMenu.OrderBy(o => o.rodzaj).ThenBy(o => o.nazwa).ToList(); // NOWE
@@ -43,7 +42,7 @@ namespace restauracja
             List<Potrawa> posortowaneMenu = glowneMenu.OrderBy(o => o.rodzaj).ThenBy(o => o.nazwa).ToList(); //sortuje kategoriami -> alfabetycznie
             int i = 0;
             int zabezpiecznie = 1;
-            foreach(Potrawa obj in posortowaneMenu)
+            foreach (Potrawa obj in posortowaneMenu)
             {
                 if (posortowaneMenu[i].rodzaj == 1 && zabezpiecznie == 1)
                 {
@@ -59,7 +58,7 @@ namespace restauracja
                     Console.ForegroundColor = ConsoleColor.White;
                     zabezpiecznie++;
                 }
-                if (posortowaneMenu[i].rodzaj == 3 && zabezpiecznie == 3) 
+                if (posortowaneMenu[i].rodzaj == 3 && zabezpiecznie == 3)
                 {
                     Console.ForegroundColor = ConsoleColor.DarkMagenta;
                     Console.WriteLine("Dania główne");
@@ -91,13 +90,7 @@ namespace restauracja
                 glowneMenu.Add(new Potrawa(tablica[0], int.Parse(tablica[1]), decimal.Parse(tablica[2])));
                 Console.WriteLine("Dodano pozycję do menu");
             }
-            else Console.WriteLine("Błędne dane");         
+            else Console.WriteLine("Błędne dane");
         }
-
-        //public override string ToString()
-        //{
-        //    przygodujMenu();
-        //    return aktualneMenu;
-        //}
     }
 }

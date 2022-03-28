@@ -7,65 +7,46 @@ using System.Text.RegularExpressions;
 
 namespace restauracja
 {
-    class Klient : IOsoba
+    class Klient
     {
-        public int id { get; set; }
-        public string imie { get; set; }
-        public string nazwisko { get; set; }
-        public decimal balans { get; set; } //TODO: dodawanie balansu automatycznie
-        public int rabat { get; set; }//TODO: wpisanie rabatu takiego jaki chcemy dac klientowi
-        public List<Klient> listaklientow = new List<Klient>();
-        public Klient(int id, string imie, string nazwisko, decimal balans, int rabat)
+        public List<Osoba> listaklientow { get; set; }
+
+        public Klient()
         {
-            this.id = id;
-            this.imie = imie;
-            this.nazwisko = nazwisko;
-            this.balans = balans;
-            this.rabat = rabat;
+            listaklientow = zwrocListeKlientow();
         }
-        public void stworzListe(List<Klient> lista)
+        public List<Osoba> zwrocListeKlientow()
         {
-            listaklientow = lista;
+            return new List<Osoba> {
+                   new Osoba ("Adam", "Kowalski", 1, 1),
+                   new Osoba ("Michał", "Trynkiewicz", 1, 0),
+                   new Osoba ("Daniel", "Nowak", 1, 0),
+                   };
         }
-        
-        
-        //public void przypiszid(List<Klient> listaklientow)
-        //{
-        //    for (int i = 0; i < listaklientow.Count(); i++)
-        //    {
-        //        listaklientow[i].id_klienta = i;
-        //    }
-        //}
+
+
         public void NowyKlient(string daneklienta)
         {
             string[] tablica = daneklienta.Split();
-            //Regex sprawdzenieid = new Regex("^[0-9]+");// dodawanie id automatycznie
             Regex sprawdzenieimie = new Regex("^[A-Z]");
             Regex sprawdzenienazwisko = new Regex("^[A-Z]");
-            Regex sprawdzenierabat = new Regex("^[0-100]{1}$");
-            if (sprawdzenieimie.IsMatch(tablica[1]) && sprawdzenienazwisko.IsMatch(tablica[2]) && sprawdzenierabat.IsMatch(tablica[4]))
+            Regex sprawdzenierabat = new Regex("^[0]?|[1-9]{1}[0-9]{1}");
+            if (sprawdzenieimie.IsMatch(tablica[0]) && sprawdzenienazwisko.IsMatch(tablica[1]) && sprawdzenierabat.IsMatch(tablica[2]))
             {
-                listaklientow.Add(new Klient(5 ,tablica[1], tablica[2], decimal.Parse(tablica[3]), int.Parse(tablica[4])));
+                listaklientow.Add(new Osoba(tablica[0], tablica[1], int.Parse(tablica[2]), int.Parse(tablica[3])));
                 Console.WriteLine("Dodano klienta");
             }
             else Console.WriteLine("Błędne dane");
         }
-
         public void wypiszKlientow()
         {
-            List <Klient> posegregowanalistaklientow = listaklientow.OrderBy(x => x.id).ToList();
             Console.ForegroundColor = ConsoleColor.DarkMagenta;
             Console.WriteLine("Lista klientów:");
             Console.ForegroundColor = ConsoleColor.White;
-            foreach (Klient item in posegregowanalistaklientow)
+            foreach (Osoba item in listaklientow)
             {
                 Console.WriteLine(item);
             }
-        }
-
-        public override string ToString()
-        {
-            return ($"ID:{id,-5} Imie: {imie,-10} Nazwisko: {nazwisko,-15} Balans: {balans,-5} Rabat: {rabat}%");
         }
     }
 }

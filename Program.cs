@@ -78,7 +78,15 @@ namespace restauracja
             //zamownienie.wybierzPotrawe(dlaKlienta);
 
 
+            //Klient wyswietlklientow = new Klient();
+            //Console.WriteLine("Dodaj klienta: ");
+            //wyswietlklientow.NowyKlient(Console.ReadLine());
+            //wyswietlklientow.wypiszKlientow();
 
+            ListaStolikow zarzadzaniestolikami = new ListaStolikow();
+            Console.WriteLine("Dodaj stolik:");
+            zarzadzaniestolikami.NowyStolik(Console.ReadLine());
+            zarzadzaniestolikami.wypiszStoliki();
         }
     }
 }

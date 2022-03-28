@@ -53,22 +53,19 @@ namespace restauracja
         {
             Console.WriteLine(naNiebiesko("\nTwoje aktualne zamownie: "));
             Console.ForegroundColor = ConsoleColor.White;
-            List<Potrawa> czysta = new List<Potrawa>();
             int y = 0;
             foreach (Potrawa potrawa in aktualneZamowienie)
             {
-                if(y != 0 && czysta.Contains(potrawa)) //czy element nie jest pierwszy i czy są takie same
+                if (y != 0 && aktualneZamowienie[y].nazwa == aktualneZamowienie[y-1].nazwa) //czy element nie jest pierwszy i czy są takie same
                 {
                     y++;
-                    czysta.Add(potrawa);
                     continue; // jeżeli elementy są takie same, skipnij foreach
                 }
-                else
+                else //jeżeli pierwszy po prostu wypisz
                 {
                     int podlicz = aktualneZamowienie.Count(p => p.nazwa == potrawa.nazwa); // liczba obiektów o tej nazwie w liście zamówienie
                     Console.WriteLine($"{potrawa.nazwa,-14} {potrawa.cena} zł x {podlicz}");
                 }
-                czysta.Add(potrawa);
                 y++;
             }
             lacznaCena = 0; //czyści wartość po poprzednim wypisaniu
@@ -80,44 +77,25 @@ namespace restauracja
 
         public string wyborKliena(string decyzja)// sprawdzanie + -, sprawdzanie potrawy, sprawdzanie czy wystąpiła, wypisywanie ile razy, sprowadzanie wszystkiego do wielkich liter, podsumowywanie
         {
-            if (decyzja == "koniec") return "Dziękujemy za zamówienie";
+            if (decyzja == "koniec") return "koniec";
             string[] tablicaDecyzji = decyzja.Split();
-            if (tablicaDecyzji.Length == 2)
-            {
-                decyzja += " PUSTKA";
-            }
-            tablicaDecyzji = decyzja.Split();
             if (tablicaDecyzji.Length == 1) return naZolto("Zapomniałeś określić, czy chcesz dodać potrawę czy usunąć z listy, lub nie dałeś spacji po + lub -");
             var wybranaPotrawa = aktualneMenu.FirstOrDefault(o => o.nazwa.ToUpper() == tablicaDecyzji[1].ToUpper());
             if(wybranaPotrawa != null)
             {
-                int liczba;
-                if(tablicaDecyzji[2] == "PUSTKA") liczba = 1; //sprawdza czy było puste miejsce
-                else if (int.TryParse(tablicaDecyzji[2], out liczba)) liczba = int.Parse(tablicaDecyzji[2]);
-                else liczba = 1;
-                for (int i = 0; i< liczba; i++)
+                if (tablicaDecyzji[0] == "+") // dodaj potrawe do aktualne zamówienie
                 {
-                    if (tablicaDecyzji[0] == "+") // dodaj potrawe do aktualne zamówienie
-                    {
-                        dodajPotraweZZamowienia(wybranaPotrawa);
-                        //return naZielono($"Dodano potrawę {wybranaPotrawa.nazwa}");
-                    }
-                    else if (tablicaDecyzji[0] == "-") // usuń potrawe z aktualne zamówienie
-                    {
-                        usunPotraweZZamowienia(wybranaPotrawa);
-                        //return naCzerwono($"Usunięto potrawę {wybranaPotrawa.nazwa}");
-                    }
-                    else
-                    {
-                        return naZolto("Błędnie okreśłiłeś operację");
-                        //continue;
-                    }
+                    dodajPotraweZZamowienia(wybranaPotrawa);
+                    return naZielono($"Dodano potrawę {wybranaPotrawa.nazwa}");
                 }
-                if (tablicaDecyzji[0] == "+") return naZielono($"Dodano potrawę {wybranaPotrawa.nazwa}");
-                else if (tablicaDecyzji[0] == "-") return naCzerwono($"Usunięto potrawę {wybranaPotrawa.nazwa}");
+                else if (tablicaDecyzji[0] == "-") // usuń potrawe z aktualne zamówienie
+                {
+                    usunPotraweZZamowienia(wybranaPotrawa);
+                    return naCzerwono($"Usunięto potrawę {wybranaPotrawa.nazwa}");
+                }
+                else return naZolto("Błędnie okreśłiłeś operację");
             }
             else return naZolto($"Błędnie wybrałeś potrawę, nie posiadamy potrawy: {tablicaDecyzji[1]}"); // wypisuje potrawe klienta
-            return "Coś poszło nie tak";
         }
 
         public decimal wybierzPotrawe(Menu obecneMenu)
