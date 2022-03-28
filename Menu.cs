@@ -36,6 +36,9 @@ namespace restauracja
 
         public void wypiszMenu()
         {
+            Console.ForegroundColor = ConsoleColor.Cyan;
+            Console.WriteLine("-- Aktualne Menu --");
+            Console.ForegroundColor = ConsoleColor.White;
             List<Potrawa> posortowaneMenu = glowneMenu.OrderBy(o => o.rodzaj).ThenBy(o => o.nazwa).ToList(); //sortuje kategoriami -> alfabetycznie
             int i = 0;
             int zabezpiecznie = 1;
