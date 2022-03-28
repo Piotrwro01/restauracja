@@ -98,7 +98,7 @@ namespace restauracja
             else return naZolto($"Błędnie wybrałeś potrawę, nie posiadamy potrawy: {tablicaDecyzji[1]}"); // wypisuje potrawe klienta
         }
 
-        public void wybierzPotrawe(Menu obecneMenu)
+        public decimal wybierzPotrawe(Menu obecneMenu)
         {
             bool czyKoniec = false;
             do
@@ -128,6 +128,8 @@ namespace restauracja
                 Console.WriteLine(wyborKliena(decyz));
             } while (!czyKoniec);
             //obciążamy balans klienta o lacznaCena(decimal)
+            //komunikacja w konsoli klienta
+            return lacznaCena;
         }
     }
 }
