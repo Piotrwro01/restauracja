@@ -9,21 +9,22 @@ namespace restauracja
 {
     class Klient
     {
-        public List<Osoba> listaklientow { get; set; }
 
-        public Klient()
+        public static int id = 1;
+        public string imie { get; set; }
+        public string nazwisko { get; set; }
+        public decimal balans { get; set; } //TODO: dodawanie balansu automatycznie
+        public int rabat { get; set; }
+
+        public Klient(string imie, string nazwisko, decimal balans, int rabat)
         {
-            listaklientow = zwrocListeKlientow();
-        }
-        public List<Osoba> zwrocListeKlientow()
-        {
-            return new List<Osoba> {
-                   new Osoba ("Adam", "Kowalski", 1, 1),
-                   new Osoba ("Michał", "Trynkiewicz", 1, 0),
-                   new Osoba ("Daniel", "Nowak", 1, 0),
-                   };
+            this.imie = imie;
+            this.nazwisko = nazwisko;
+            this.balans = balans;
+            this.rabat = rabat;
         }
 
+        public List<Klient> listaklientow { get; set; }
 
         public void NowyKlient(string daneklienta)
         {
@@ -33,7 +34,7 @@ namespace restauracja
             Regex sprawdzenierabat = new Regex("^[0]?|[1-9]{1}[0-9]{1}");
             if (sprawdzenieimie.IsMatch(tablica[0]) && sprawdzenienazwisko.IsMatch(tablica[1]) && sprawdzenierabat.IsMatch(tablica[2]))
             {
-                listaklientow.Add(new Osoba(tablica[0], tablica[1], int.Parse(tablica[2]), int.Parse(tablica[3])));
+                listaklientow.Add(new Klient(tablica[0], tablica[1], int.Parse(tablica[2]), int.Parse(tablica[3])));
                 Console.WriteLine("Dodano klienta");
             }
             else Console.WriteLine("Błędne dane");
@@ -43,10 +44,15 @@ namespace restauracja
             Console.ForegroundColor = ConsoleColor.DarkMagenta;
             Console.WriteLine("Lista klientów:");
             Console.ForegroundColor = ConsoleColor.White;
-            foreach (Osoba item in listaklientow)
+            foreach (Klient item in listaklientow)
             {
                 Console.WriteLine(item);
             }
+        }
+
+        public override string ToString()
+        {
+            return ($"ID:{id++,-5} Imie: {imie,-10} Nazwisko: {nazwisko,-15} Balans: {balans,-5} Rabat: {rabat}%");
         }
     }
 }

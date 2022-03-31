@@ -10,17 +10,20 @@ namespace restauracja
     class Program
     {
         static List<Klient> listaklientow = new List<Klient> { //jakaś uproszczona baza klientów, bez używania baz danych
-                   new Klient(1, "Adam", "Kowalski", 1, 0),
-                   new Klient(2, "Michał", "Trynkiewicz", 1, 0),
-                   new Klient(3, "Daniel", "Nowak", 1, 0) };
+                   new Klient("Adam", "Kowalski", 1, 0),
+                   new Klient("Michał", "Trynkiewicz", 1, 0),
+                   new Klient("Daniel", "Nowak", 1, 0) 
+        };
+
+
         static void weryfikacjaKlienta()
         {
             Console.Clear();
-            Console.WriteLine("Podaj swoje id: ");
-            int id = int.Parse(Console.ReadLine());
+            Console.WriteLine("Podaj swoje nazwisko: ");
+            string nazwisko = Console.ReadLine();
             foreach(Klient obj in listaklientow)
             {
-                if (id == obj.id) new KonsolaKlienta(obj, new Menu());
+                if (nazwisko.ToUpper() == obj.nazwisko.ToUpper()) new KonsolaKlienta(obj, new Menu());
             }
         }
         void wlasciciel()
@@ -85,7 +88,7 @@ namespace restauracja
 
             ListaStolikow zarzadzaniestolikami = new ListaStolikow();
             Console.WriteLine("Dodaj stolik:");
-            zarzadzaniestolikami.NowyStolik(Console.ReadLine());
+            zarzadzaniestolikami.NowyStolik(Console.ReadLine()); // id, ilość miejsc, cena, zajęty wolny (0, 1)
             zarzadzaniestolikami.wypiszStoliki();
         }
     }
