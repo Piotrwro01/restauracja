@@ -17,14 +17,15 @@ namespace restauracja
             this.menu = menu;
             this.zamowienieUzytkownika = new Zamowienie(menu);
             Console.Clear();
-            Console.WriteLine($"Witaj {uzytkownik.imie}, miło nam znowu Cię gościć. \nCo chciałbyś dzisiaj zrobić?");
+            Console.WriteLine($"Witaj {uzytkownik.imie}, miło nam znowu Cię gościć. \nCo chciałbyś dzisiaj zrobić?\n");
             
             bool dzialamy = true;
             ConsoleKeyInfo keyInfo;
             do
             {
-                Console.Write($"   [r] Zarezerwować stolik\n   [z] Złożyć zamówienie");
+                Console.Write($"   [r] Zarezerwować stolik\n   [z] Złożyć zamówienie\n");
                 keyInfo = Console.ReadKey();
+                Console.Clear();
                 switch (keyInfo.Key)
                 {
                     case ConsoleKey.R:

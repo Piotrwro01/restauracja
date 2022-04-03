@@ -7,7 +7,7 @@ using System.Text.RegularExpressions;
 
 namespace restauracja
 {
-    class Potrawa
+    class Potrawa : ICena
     {
         public string nazwa { get; }
         public int rodzaj { get; set; }

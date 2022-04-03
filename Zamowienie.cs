@@ -18,13 +18,13 @@ namespace restauracja
         }
         public decimal podajCene() => lacznaCena;
 
-        private void usunPotraweZZamowienia(Potrawa doUsuniecia)
+        private void usunPotraweZZamowienia(Potrawa doUsuniecia, int ileUsunac)
         {
-            aktualneZamowienie.Remove(doUsuniecia);
+            for(int i = 0; i<ileUsunac; i++) aktualneZamowienie.Remove(doUsuniecia);
         }
-        private void dodajPotraweZZamowienia(Potrawa doUsuniecia)
+        private void dodajPotraweZZamowienia(Potrawa doUsuniecia, int ileDodac)
         {
-            aktualneZamowienie.Add(doUsuniecia);
+            for (int i = 0; i < ileDodac; i++) aktualneZamowienie.Add(doUsuniecia);
         }
 
         private string naZolto(string tekstNaZolto)
@@ -54,10 +54,13 @@ namespace restauracja
             Console.WriteLine(naNiebiesko("\nTwoje aktualne zamownie: "));
             Console.ForegroundColor = ConsoleColor.White;
             int y = 0;
+            List<Potrawa> zamowienie = new List<Potrawa>();
             foreach (Potrawa potrawa in aktualneZamowienie)
             {
-                if (y != 0 && aktualneZamowienie[y].nazwa == aktualneZamowienie[y-1].nazwa) //czy element nie jest pierwszy i czy są takie same
+                //y != 0 && aktualneZamowienie[y].nazwa == aktualneZamowienie[y-1].nazwa
+                if (zamowienie.Contains(potrawa)) //czy element nie jest pierwszy i czy są takie same
                 {
+                    zamowienie.Add(potrawa);
                     y++;
                     continue; // jeżeli elementy są takie same, skipnij foreach
                 }
@@ -67,6 +70,7 @@ namespace restauracja
                     Console.WriteLine($"{potrawa.nazwa,-14} {potrawa.cena} zł x {podlicz}");
                 }
                 y++;
+                zamowienie.Add(potrawa);
             }
             lacznaCena = 0; //czyści wartość po poprzednim wypisaniu
             foreach (Potrawa potrawa in aktualneZamowienie) lacznaCena += potrawa.podajCene(); //sumuje cene zamówienia
@@ -80,17 +84,18 @@ namespace restauracja
             if (decyzja == "koniec") return "koniec";
             string[] tablicaDecyzji = decyzja.Split();
             if (tablicaDecyzji.Length == 1) return naZolto("Zapomniałeś określić, czy chcesz dodać potrawę czy usunąć z listy, lub nie dałeś spacji po + lub -");
+            int ile = tablicaDecyzji.Length > 2 ? int.Parse(tablicaDecyzji[2]) : 1; // sprawdza ile uzytkownik chciał dodać
             var wybranaPotrawa = aktualneMenu.FirstOrDefault(o => o.nazwa.ToUpper() == tablicaDecyzji[1].ToUpper());
             if(wybranaPotrawa != null)
             {
                 if (tablicaDecyzji[0] == "+") // dodaj potrawe do aktualne zamówienie
                 {
-                    dodajPotraweZZamowienia(wybranaPotrawa);
+                    dodajPotraweZZamowienia(wybranaPotrawa, ile);
                     return naZielono($"Dodano potrawę {wybranaPotrawa.nazwa}");
                 }
                 else if (tablicaDecyzji[0] == "-") // usuń potrawe z aktualne zamówienie
                 {
-                    usunPotraweZZamowienia(wybranaPotrawa);
+                    usunPotraweZZamowienia(wybranaPotrawa, ile);
                     return naCzerwono($"Usunięto potrawę {wybranaPotrawa.nazwa}");
                 }
                 else return naZolto("Błędnie okreśłiłeś operację");
@@ -131,5 +136,6 @@ namespace restauracja
             //komunikacja w konsoli klienta
             return lacznaCena;
         }
+
     }
 }
