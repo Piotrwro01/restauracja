@@ -8,7 +8,7 @@ namespace restauracja
 {
     class Osoba
     {
-        int id = 1;
+        //int id = 1;
         string imie { get; set; }
         string nazwisko { get; set; }
         decimal balans { get; set; } //TODO: dodawanie balansu automatycznie

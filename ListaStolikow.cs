@@ -21,7 +21,7 @@ namespace restauracja
                    new Stolik (1, 2, 20, 1),
                    new Stolik (2, 2, 20, 1),
                    new Stolik (3, 4, 40, 0),
-                   new Stolik (4, 6, 60, 0),
+                   new Stolik (8, 1, 60, 0),
                    };
         }
         public void wypiszStoliki()
@@ -48,7 +48,15 @@ namespace restauracja
                 Console.WriteLine("Dodano stolik");
             }
             else Console.WriteLine("Błędne dane");
+        }
 
+        public void zmienStatusStolika(Stolik dozmiany)
+        {
+           if(dozmiany.status == 0)
+            {
+                dozmiany.status = 1;
+            }
+                
         }
     }
 }

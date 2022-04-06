@@ -18,7 +18,7 @@ namespace restauracja
 
         public List<Potrawa> zwrocPodstawoweMenu()
         {
-            return new List<Potrawa> {
+            return  new List<Potrawa> {
                     new Potrawa ("Gulasz",1, 10),
                     new Potrawa ("Barszcz",2, 6),
                     new Potrawa ("Pierogi",2, 12),
@@ -29,9 +29,9 @@ namespace restauracja
         public void wybierzPotrawe()
         {
         }
-        public List<Potrawa> podajMenu() //NOWE
+        public List<Potrawa> podajMenu() 
         {
-            return glowneMenu.OrderBy(o => o.rodzaj).ThenBy(o => o.nazwa).ToList(); // NOWE
+            return glowneMenu.OrderBy(o => o.rodzaj).ThenBy(o => o.nazwa).ToList(); 
         }
 
         public void wypiszMenu()
