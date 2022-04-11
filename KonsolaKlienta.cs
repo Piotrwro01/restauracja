@@ -9,6 +9,7 @@ namespace restauracja
 {
     class KonsolaKlienta
     {
+        
         Klient uzytkownik { get; set; }
         Menu menu { get; set; }
         Zamowienie zamowienieUzytkownika;
@@ -33,35 +34,8 @@ namespace restauracja
                 switch (keyInfo.Key)
                 {
                     case ConsoleKey.R:
-                        Rezerwacja rezerwowanko = new Rezerwacja(listaStolikow);
-                        Console.WriteLine("\nPodaj liczbę miejsc przy stoliku:");                      
-                        Regex sprawdzeniedanych = new Regex("^[1-6]$");
-                        string dosprawdzenia = Console.ReadLine();
-                        if (sprawdzeniedanych.IsMatch(dosprawdzenia))
-                        {
-                            rezerwowanko.dobraniestolika(int.Parse(dosprawdzenia));
-                            Console.WriteLine("Czy chcesz podjąć jeszcze jakieś działania jako klient? (T/N)");
-                            keyInfo = Console.ReadKey();
-                            switch (keyInfo.Key)
-                            {
-                                case ConsoleKey.T:
-                                    Console.WriteLine();
-                                    continue;
-
-                                case ConsoleKey.N:
-                                    Console.WriteLine();
-                                    Console.Clear();
-                                    break;
-                            }
-                        }
-                        else 
-                        Console.ForegroundColor = ConsoleColor.Yellow; // TODO:pozwala od razu jeszcze raz wpisać liczbe miejsc
-                        Console.WriteLine("Nie posiadamy stolika z taką ilością miejsc.");                       
-                        Console.ForegroundColor = ConsoleColor.White;
-                        
-
+                        Console.Clear();
                         break;
-
                     case ConsoleKey.Z:
                         //Console.Clear();
                         Console.WriteLine("Już przyjmujemy Twoje zamówienie.\n");

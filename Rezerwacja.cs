@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace restauracja
 {
-    class Rezerwacja
+    class Rezerwacja 
     {
         private List<Stolik> aktualnarezerwacja = new List<Stolik>(); //lokalna lista stolików z naszej bazy [ListaStolikow.cs]
 
@@ -30,7 +30,7 @@ namespace restauracja
         } //rezerwacja -> zmien status -> aktualnarezerwacja
         public void zwrocAktualnarezerwacje()
         {
-            Console.WriteLine(aktualnarezerwacja);
+            Console.WriteLine(aktualnarezerwacja); 
         }
 
         public Stolik dobraniestolika(int ilemiejsc)
@@ -63,11 +63,11 @@ namespace restauracja
                 }
                 else
                 {
-                    //dostepne stoliki sa tylko mniejsze
+                    Console.WriteLine("Aktualnie posiadamy stoliki tylko na mniejszą ilość osób");
                 }
             }         
             return null;
-        }
+                }               
         private void potwierdzenirezerwacji(Stolik st)
         {
             Console.ForegroundColor = ConsoleColor.Yellow;
@@ -89,6 +89,7 @@ namespace restauracja
                     Console.ForegroundColor = ConsoleColor.White;
                     break;
             }
+           
         }
         public void zmienStatusStolika(Stolik dozmiany)
         {
@@ -104,6 +105,6 @@ namespace restauracja
             //dozmiany.status = 1;
             ////}
 
-        }
     }
+}
 }
